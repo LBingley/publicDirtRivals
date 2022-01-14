@@ -47,8 +47,7 @@ jobs:
         restore-keys: ${{ runner.os }}-sonar-scanner
     - name: Install SonarCloud scanner
       if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-      env: 
-        shell: powershell
+      shell: pwsh
       run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
@@ -59,7 +58,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
       run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"NickVanGerwen_Plant-Project" /o:"nickvangerwen" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"LBingley_publicDirtRivals" /o:"dirtrivals" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           Build
           Test
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
